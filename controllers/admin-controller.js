@@ -17,18 +17,6 @@ const setAdmin = (bot) => {
                 ]))
         }
     });
-
-    bot.command('stat', async ctx => {
-        if (isAdmin(ctx)) {
-            const userCount = await User.countDocuments();
-            ctx.reply(`Users: ${userCount}`,
-                Markup.inlineKeyboard([
-                    [
-                        Markup.button.callback(getTranslation('main'), 'main'),
-                    ]
-                ]))
-        }
-    });
 };
 
 module.exports = setAdmin;
