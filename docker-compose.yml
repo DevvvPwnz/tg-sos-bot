@@ -1,0 +1,49 @@
+version: '3'
+services:
+ # Node.js Service
+  nodejs-app:
+    build:
+      context: .
+      dockerfile: Dockerfile  # Path to your Node.js Dockerfile
+    depends_on:
+      - mongo
+      - redis
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - TELEGRAM_BOT_TOKEN=6844249160:AAGz61pNVD8BeXBsIh1GGdAu49ovTDevj3Q
+      - MONGO_URI=mongodb://g00d:g00dPwnz@mongo:27017/liberty
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    ports:
+      - "3000:3000"  # Adjust the port as needed
+    volumes:
+      - .:/usr/src/app
+    networks:
+      - bot
+  # MongoDB Service
+  mongo:
+    image: "mongo:latest"
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: liberty
+      MONGO_INITDB_ROOT_USERNAME: g00d
+      MONGO_INITDB_ROOT_PASSWORD: g00dPwnz
+    volumes:
+      - ./mongodb:/data/db
+      - ./init.js:/docker-entrypoint-initdb.d/init.js
+    ports:
+      - "27017:27017"  # Expose MongoDB port if needed
+    networks:
+      - bot
+  # Redis Service
+  redis:
+    image: "redis:latest"
+    restart: always
+    ports:
+      - "6379:6379"  # Expose Redis port if needed
+    networks:
+      - bot
+volumes: {}
+networks:
+  bot:
