@@ -18,6 +18,7 @@ services:
     ports:
       - "3000:3000"  # Adjust the port as needed
     volumes:
+      - /usr/src/app/node_modules
       - .:/usr/src/app
     networks:
       - bot
