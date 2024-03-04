@@ -9,10 +9,10 @@ services:
       - mongo
       - redis
     restart: always
-    environment:
+    environment: # MOCK DATA
       - NODE_ENV=production
-      - TELEGRAM_BOT_TOKEN=6844249160:AAGz61pNVD8BeXBsIh1GGdAu49ovTDevj3Q
-      - MONGO_URI=mongodb://g00d:g00dPwnz@mongo:27017/liberty
+      - TELEGRAM_BOT_TOKEN=bot_token
+      - MONGO_URI=mongodb://username:password@mongo:27017/db
       - REDIS_HOST=redis
       - REDIS_PORT=6379
     ports:
@@ -26,10 +26,10 @@ services:
   mongo:
     image: "mongo:latest"
     restart: always
-    environment:
-      MONGO_INITDB_DATABASE: liberty
-      MONGO_INITDB_ROOT_USERNAME: g00d
-      MONGO_INITDB_ROOT_PASSWORD: g00dPwnz
+    environment: # MOCK DATA
+      MONGO_INITDB_DATABASE: dbname
+      MONGO_INITDB_ROOT_USERNAME: username
+      MONGO_INITDB_ROOT_PASSWORD: password
     volumes:
       - ./mongodb:/data/db
       - ./init.js:/docker-entrypoint-initdb.d/init.js
