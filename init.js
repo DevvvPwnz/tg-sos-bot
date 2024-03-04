@@ -1,6 +1,6 @@
-db = db.getSiblingDB('liberty');
+db = db.getSiblingDB('dbname');
 db.createUser({
-    user: 'g00d',
-    pwd: 'g00dPwnz',
+    user: 'username',
+    pwd: 'password',
     roles: [{ role: 'readWrite', db: 'liberty' }]
 });
